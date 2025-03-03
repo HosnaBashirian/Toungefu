@@ -1,3 +1,3 @@
 # Toungefu
 
-![](frog gif.gif)
+![](frog_gif.gif)
