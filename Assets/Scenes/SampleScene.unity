@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 307955120}
   - component: {fileID: 307955119}
   - component: {fileID: 307955118}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1772,7 +1772,7 @@ GameObject:
   - component: {fileID: 1458636300}
   - component: {fileID: 1458636299}
   - component: {fileID: 1458636298}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -2124,7 +2124,7 @@ GameObject:
   - component: {fileID: 1670160909}
   - component: {fileID: 1670160908}
   - component: {fileID: 1670160913}
-  - component: {fileID: 1670160907}
+  - component: {fileID: 1670160914}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -2132,27 +2132,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1670160907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670160906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d571f95d39e75cd4e87472d0bdeb2132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585545}
-  moveSpeed: 7
-  jumpPower: 10
-  gravity: 10
-  lookSensitivity: 2
-  lookXLimit: 45
-  rotationX: 0
-  rotationY: 0
-  canMove: 1
 --- !u!143 &1670160908
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2278,8 +2257,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670160906}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 3
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2297,6 +2276,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1670160914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670160906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2408280885a48408cbda20b1c42e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileSize: 2
+  moveSpeed: 5
 --- !u!1 &2106648248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,7 +2373,7 @@ Transform:
   m_GameObject: {fileID: 2106648248}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.005, y: -0.39099997, z: -0.202}
+  m_LocalPosition: {x: -0.005, y: -0.39099997, z: -0.2019999}
   m_LocalScale: {x: 0.25, y: 0.5, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -10,8 +10,7 @@ public class Tongue : MonoBehaviour
     public float retractDuration  = 0.1f;
     
     private Vector3 originalTonguePosition;
-    private Vector3 originalTongueScale;
-    private Vector3 lickDirection;
+    private Vector3 lickTarget;
     
     private Tween lickTween;
     private Tween moveTween;
@@ -19,16 +18,18 @@ public class Tongue : MonoBehaviour
     public float maxDistance = 5f;
     
     private bool isInputAllowed = true;
+    private bool isObstacleThere = false;
     
     void Start()
     {
         originalTonguePosition = transform.localPosition;
         
+        
     }
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isInputAllowed)
+        if (Input.GetKeyDown(KeyCode.L) && isInputAllowed)
         {
             isInputAllowed = false;
             
@@ -40,7 +41,10 @@ public class Tongue : MonoBehaviour
             else
             {
                 LickAnimation();
-                CheckForColliders();
+                if (CheckForObstacles(lickTarget))
+                {
+                    
+                }
             }
         }
     }
@@ -64,28 +68,17 @@ public class Tongue : MonoBehaviour
         lickTween = sequence;
     }
 
-    public void CheckForColliders()
+    private bool CheckForObstacles(Vector3 position)
     {
-        Vector3 rayOrigin = transform.position;
-        Vector3 rayDirection = transform.forward;
-        
-        Ray ray = new Ray(rayOrigin, rayDirection);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
-        {
-            Debug.Log(hit.collider.gameObject.name);
 
-            if (hit.collider.CompareTag("Pickable"))
-            {
-                PickObject(hit.collider.gameObject);
-            }
-        }
+        return isObstacleThere;
+    }
 
-        void PickObject(GameObject obj)
-        {
+    void PickObject(GameObject obj)
+     {
             Debug.Log(obj.name);
             Destroy(obj);
-        }
-    }
+     }
 
     
 }
