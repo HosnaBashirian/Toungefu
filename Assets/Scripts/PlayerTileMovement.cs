@@ -36,21 +36,21 @@ public class PlayerTileMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            inputDirection += Vector3.forward;
+            inputDirection = transform.forward;
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            inputDirection -= Vector3.forward;
+            inputDirection = -transform.forward;
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            inputDirection += Vector3.right;
+            inputDirection = transform.right;
         }
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            inputDirection -= Vector3.right;
+            inputDirection = -transform.right;
         }
-
+        
         if (inputDirection != Vector3.zero)
         {
             targetPosition = transform.position + inputDirection * tileSize;
@@ -90,9 +90,12 @@ public class PlayerTileMovement : MonoBehaviour
 
     private void RotatePlayer()
     {
-        Quaternion targetRotation = Quaternion.LookRotation(lastDirection);
+        if (lastDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(lastDirection);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
     }
     
     private bool IsPositionValid(Vector3 position)
