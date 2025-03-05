@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tongue
   - Pickable
+  - Tile
   layers:
   - Default
   - TransparentFX
