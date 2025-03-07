@@ -19,21 +19,8 @@ public class PlayerTileMovement : MonoBehaviour
         cc = GetComponent<CharacterController>();
         targetPosition = transform.position;
         lastDirection = transform.forward;
-        
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit, 2f))
-        {
-            transform.position = hit.point + Vector3.up * (cc.height / 2);
-        }
-        
-        Invoke(nameof(EnableGameStart), 0.5f);
     }
-    
-    void EnableGameStart()
-    {
-        isGameStarted = true;
-    }
-
-
+  
     void Update()
     {
         HandleInput();
@@ -53,7 +40,9 @@ public class PlayerTileMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            inputDirection = -transform.forward;
+            // inputDirection = -transform.forward;
+            lastDirection = -transform.forward;
+            return;
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -93,17 +82,11 @@ public class PlayerTileMovement : MonoBehaviour
         if (isMoving)
         {
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
-            float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
             Vector3 movement = moveDirection * moveSpeed * Time.deltaTime;
-    
-            if (movement.magnitude > distanceToTarget)
-            {
-                movement = moveDirection * distanceToTarget;
-            }
             
             cc.Move(movement);
     
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
             {
                 transform.position = targetPosition;
                 isMoving = false;
@@ -125,12 +108,11 @@ public class PlayerTileMovement : MonoBehaviour
     {
         Vector3 direction = (position - transform.position).normalized;
         float distance = Vector3.Distance(transform.position, position);
-        
         Vector3 boxSize = new Vector3(tileSize * 0.9f, tileSize * 0.9f, tileSize * 0.9f);
         Vector3 boxCastOrigin = transform.position + Vector3.up * 0.1f;
         
         bool isBlocked = Physics.BoxCast(
-            transform.position,
+            boxCastOrigin,
             boxSize / 2,
             direction,          
             Quaternion.identity,
@@ -148,10 +130,11 @@ public class PlayerTileMovement : MonoBehaviour
         {
             Vector3 direction = (targetPosition - transform.position).normalized;
             float distance = Vector3.Distance(transform.position, targetPosition);
-            Vector3 boxSize = new Vector3(tileSize, tileSize, tileSize);
+            Vector3 boxSize = new Vector3(tileSize * 0.9f, tileSize * 0.9f, tileSize * 0.9f);
+            Vector3 boxCastOrigin = transform.position + Vector3.up * 0.1f;
 
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(transform.position + direction * distance, boxSize);
+            Gizmos.DrawWireCube(boxCastOrigin + direction * distance, boxSize);
         }
     }
 }
