@@ -2008,6 +2008,7 @@ MonoBehaviour:
   tilePrefab: {fileID: 7519229999903276419, guid: 46e38408545581847ac28505b79fb62f, type: 3}
   wallMaterial: {fileID: 2100000, guid: 326cebae91698d04a93469ddbdbe1df6, type: 2}
   doorMaterial: {fileID: 2100000, guid: bffd78300359d3c4ba334c783ef73bb9, type: 2}
+  playerMaterial: {fileID: 2100000, guid: 3ed5a682c3a41354da2198a71a61ccf8, type: 2}
 --- !u!4 &2082993852
 Transform:
   m_ObjectHideFlags: 0

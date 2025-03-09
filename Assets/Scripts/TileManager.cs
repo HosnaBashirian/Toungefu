@@ -14,6 +14,7 @@ public class TileManager : MonoBehaviour
     public GameObject tilePrefab;
     public Material wallMaterial;
     public Material doorMaterial;
+    public Material playerMaterial;
     
     private List<List<Vector3>> groundGrid; // stores tile positions
     private List<List<Node>> nodeGrid; // stores node data for each tile
@@ -137,10 +138,28 @@ public class TileManager : MonoBehaviour
             Vector3 playerWorldPos = player.position;
             Vector2Int playerGridPos = WorldToGridPosition(playerWorldPos);
 
-            // if (WorldToGridPosition)
-            // {
-            //     
-            // }
+            if (playerGridPos != previousPlayerGridPos)
+            {
+                if (previousPlayerGridPos.x >= 0 && previousPlayerGridPos.y >= 0 &&
+                    tileDictionary.TryGetValue(previousPlayerGridPos, out GameObject previousTile))
+                {
+                    Renderer previousRenderer = previousTile.GetComponent<Renderer>();
+                    if (previousRenderer != null)
+                    {
+                        previousRenderer.material = tilePrefab.GetComponent<Renderer>().sharedMaterial; // reset to default material
+                    }
+                }
+                if (tileDictionary.TryGetValue(playerGridPos, out GameObject currentTile))
+                {
+                    Renderer currentRenderer = currentTile.GetComponent<Renderer>();
+                    if (currentRenderer != null)
+                    {
+                        currentRenderer.material = playerMaterial; // set player material
+                    }
+                }
+                
+                previousPlayerGridPos = playerGridPos;
+            }
         }
     }
 
@@ -153,6 +172,11 @@ public class TileManager : MonoBehaviour
         col = Mathf.Clamp(col, 0, height - 1);
 
         return new Vector2Int(row, col);
+    }
+
+    private void UpdateGingyPos()
+    {
+        
     }
 
     public class Node
