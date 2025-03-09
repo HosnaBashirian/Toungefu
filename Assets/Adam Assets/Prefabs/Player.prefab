@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 6162076968817318839}
   - component: {fileID: 3689550985509310532}
   - component: {fileID: 5353101180531459764}
-  - component: {fileID: 4938860910535149745}
+  - component: {fileID: 4027201648360276919}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -184,11 +184,12 @@ Transform:
   m_GameObject: {fileID: 2778846026511135985}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0, z: -18}
+  m_LocalPosition: {x: -0.89, y: 0, z: -36.3}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4117395187155021198}
+  - {fileID: 9090168658155392051}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &420511238983507145
@@ -288,8 +289,8 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_StepOffset: 0
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5353101180531459764
@@ -315,11 +316,11 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &4938860910535149745
+--- !u!114 &4027201648360276919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,12 +329,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2778846026511135985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2408280885a48408cbda20b1c42e0a, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d3c44318cc8444a9a5a884296038e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSize: 2
   moveSpeed: 5
-  rotationSpeed: 10
+  rotationSpeed: 5
+  spawnPoint: {x: 0, y: -1, z: -40}
+  movePoint: {fileID: 9090168658155392051}
+  whatStopsMovement:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &3286462424699459528
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,3 +477,34 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &7172509795589414897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9090168658155392051}
+  m_Layer: 2
+  m_Name: MovePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9090168658155392051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172509795589414897}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7189721287792360590}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
