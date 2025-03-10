@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &184556272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4027201648360276919, guid: bd3e9de3749ca0a4bab2f4253c8a9686, type: 3}
+  m_PrefabInstance: {fileID: 6798560921062806657}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32d3c44318cc8444a9a5a884296038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &307955117
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +144,7 @@ GameObject:
   - component: {fileID: 307955120}
   - component: {fileID: 307955119}
   - component: {fileID: 307955118}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2032,6 +2043,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 253214662996658155, guid: bd3e9de3749ca0a4bab2f4253c8a9686, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 184556272}
+    - target: {fileID: 253214662996658155, guid: bd3e9de3749ca0a4bab2f4253c8a9686, type: 3}
+      propertyPath: eatable.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 253214662996658155, guid: bd3e9de3749ca0a4bab2f4253c8a9686, type: 3}
+      propertyPath: lickableDoor.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2778846026511135985, guid: bd3e9de3749ca0a4bab2f4253c8a9686, type: 3}
       propertyPath: m_Name
       value: Player
