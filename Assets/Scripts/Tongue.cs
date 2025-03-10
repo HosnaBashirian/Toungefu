@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
 public class Tongue : MonoBehaviour
 {
     private Rigidbody rb;
+    public PlayerTileMovements2 player;
     
     public float extendedDistance = 2f;
     public float extendDuration  = 0.3f;
@@ -11,11 +13,15 @@ public class Tongue : MonoBehaviour
     
     private Vector3 originalTonguePosition;
     private Vector3 lickTarget;
+
+    public LayerMask eatable;
+    public LayerMask lickableDoor;
     
     private Tween lickTween;
     private Tween moveTween;
     
     public float maxDistance = 5f;
+    public float maxHitDistance = 10f;
     
     private bool isInputAllowed = true;
     private bool isObstacleThere = false;
@@ -23,7 +29,6 @@ public class Tongue : MonoBehaviour
     void Start()
     {
         originalTonguePosition = transform.localPosition;
-        
         
     }
     
@@ -41,10 +46,6 @@ public class Tongue : MonoBehaviour
             else
             {
                 LickAnimation();
-                if (CheckForObstacles(lickTarget))
-                {
-                    
-                }
             }
         }
     }
@@ -63,22 +64,49 @@ public class Tongue : MonoBehaviour
             lickTween = null;
             isInputAllowed = true;
             // Debug.Log(originalTonguePosition);
+            PerformRaycast();
         });
         
         lickTween = sequence;
     }
-
-    private bool CheckForObstacles(Vector3 position)
+    
+    private void PerformRaycast()
     {
-
-        return isObstacleThere;
+        RaycastHit hit;
+        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, maxHitDistance))
+        {
+            if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "Eatable")
+            {
+                // if the object is eatable, destroy it
+                Eat(hit.collider.gameObject);
+            }
+            else if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "LickableDoor")
+            {
+                // if the object is a lickable door, open it
+                OpenDoor(hit.collider.gameObject);
+            }
+        }
     }
 
-    void PickObject(GameObject obj)
-     {
-            Debug.Log(obj.name);
-            Destroy(obj);
-     }
-
+    void Eat(GameObject obj)
+    {
+        Destroy(obj);
+        Debug.Log(obj.name);
+    }
     
+    void OpenDoor(GameObject door)
+    {
+        // // I have to write a script for the door with an Open function
+        // Door doorScript = door.GetComponent<Door>();
+        // if (doorScript != null)
+        // {
+        //     doorScript.Open();
+        // }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(player.transform.position, player.transform.forward);
+        Gizmos.color = Color.blue;
+    }
 }
