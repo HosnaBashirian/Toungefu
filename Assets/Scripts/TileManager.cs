@@ -8,8 +8,12 @@ public class TileManager : MonoBehaviour
 {
     public int width = 11;
     public int height = 21;
-    public Vector3 tileSize = new Vector3(2, 2, 2);
-    public Vector3 startCoordinate = new Vector3(70, -2, -40);
+
+	// Changed tileSize from Vec3 to float, easier to use... 
+    //public Vector3 tileSize = new Vector3(2, 2, 2);
+	public float tileSize = 2.0f; 	
+
+    public Vector3 startCoordinate = new Vector3(70, -2, -40); 	// Minimap position
 
     public GameObject tilePrefab;
     public Material wallMaterial;
@@ -33,6 +37,9 @@ public class TileManager : MonoBehaviour
         GenerateGrid();
         ApplyWallMaterials();
         ApplyDoorMaterials();
+
+		//player.transform.position = GridToWorldPosition(new Vector2Int(1, 1));
+		//player.gameObject.GetComponent<PlayerTileMovements2>().spawnPoint = new Vector3(1, 1, 1);
     }
 
     private void Update()
@@ -52,7 +59,8 @@ public class TileManager : MonoBehaviour
 
             for (int col = 0; col < height; col++)
             {
-                Vector3 tilePosition = startCoordinate + new Vector3(row * tileSize.x, 0, col * tileSize.z);
+                //Vector3 tilePosition = startCoordinate + new Vector3(row * tileSize.x, 0, col * tileSize.z);
+                Vector3 tilePosition = startCoordinate + new Vector3(row * tileSize, 0, col * tileSize);
                 groundGrid[row].Add(tilePosition);
 
                 GameObject tileObj = Instantiate(tilePrefab, tilePosition, Quaternion.identity);
@@ -134,8 +142,8 @@ public class TileManager : MonoBehaviour
     {
         if (player != null)
         {
-            Vector3 playerWorldPos = player.position;
-            Vector2Int playerGridPos = WorldToGridPosition(playerWorldPos);
+            //Vector3 playerWorldPos = player.position;
+            //Vector2Int playerGridPos = WorldToGridPosition(playerWorldPos);
 
             // if (WorldToGridPosition)
             // {
@@ -146,8 +154,11 @@ public class TileManager : MonoBehaviour
 
     private Vector2Int WorldToGridPosition(Vector3 worldPosition)
     {
-        int row = Mathf.FloorToInt((worldPosition.x - startCoordinate.x) / tileSize.x);
-        int col = Mathf.FloorToInt((worldPosition.z - startCoordinate.z) / tileSize. z);
+        //int row = Mathf.FloorToInt((worldPosition.x - startCoordinate.x) / tileSize.x);
+        //int col = Mathf.FloorToInt((worldPosition.z - startCoordinate.z) / tileSize. z);
+
+        int row = Mathf.FloorToInt((worldPosition.x - startCoordinate.x) / tileSize);
+        int col = Mathf.FloorToInt((worldPosition.z - startCoordinate.z) / tileSize);
 
         row = Mathf.Clamp(row, 0, width - 1);
         col = Mathf.Clamp(col, 0, height - 1);
@@ -224,3 +235,4 @@ public class TileManager : MonoBehaviour
 //         }
 //     }
 // }
+
