@@ -90,8 +90,27 @@ public class Tongue : MonoBehaviour
 
     void Eat(GameObject obj)
     {
-        Destroy(obj);
-        Debug.Log(obj.name);
+        if (((1 << obj.layer) & eatable) != 0)
+        {
+            Renderer renderer = obj.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material.DOFade(0f, 1f).OnComplete(() =>
+                {
+                    Destroy(obj);
+                    Debug.Log(obj.name + " has been eaten!");
+                });
+            }
+            else
+            {
+                Destroy(obj);
+                Debug.Log(obj.name + " has been eaten (no fade)!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Cannot eat cuz it's not on the Eatable layer!");
+        }
     }
     
     void OpenDoor(GameObject door)
@@ -108,7 +127,7 @@ public class Tongue : MonoBehaviour
 	/*
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(player.transform.position, player.transform.forward);
+        Gizmos.DrawRay(player.transform.position, player.transform.forward * maxHitDistance);
         Gizmos.color = Color.blue;
     }
 	*/
