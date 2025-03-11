@@ -15,6 +15,12 @@ public class PlayerTileMovements2 : MonoBehaviour
     public LayerMask whatStopsMovement;
 
     private bool isMoving;
+
+	public GameObject _gridManager;
+	public Handler _handler;
+
+	public Vector2Int coords;
+	public Vector2Int gridFacing;
     
     void Start()
     {
@@ -23,6 +29,9 @@ public class PlayerTileMovements2 : MonoBehaviour
         movePoint.position = spawnPoint;
 
         targetRotation = transform.rotation;
+		
+		_gridManager = GameObject.Find("GridManager");
+		_handler = _gridManager.GetComponent<Handler>();
     }
     
     void Update()
@@ -60,11 +69,13 @@ public class PlayerTileMovements2 : MonoBehaviour
                 {
                     movePoint.position = targetPosition;
                     isMoving = true;
+
+					// End turn...
+					_handler.ProcessTurn();
                 }
             }
         }
     }
-
     
     // private Vector2Int GetInputDirection()
     // {

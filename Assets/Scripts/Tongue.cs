@@ -103,10 +103,13 @@ public class Tongue : MonoBehaviour
         //     doorScript.Open();
         // }
     }
-
+	
+	// It started freaking out on me so I commented it out for now...
+	/*
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(player.transform.position, player.transform.forward);
         Gizmos.color = Color.blue;
     }
+	*/
 }
