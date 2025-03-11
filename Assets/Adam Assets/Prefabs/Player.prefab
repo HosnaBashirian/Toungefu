@@ -128,10 +128,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc5342798ac7ad48a6666625a5bd7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   extendedDistance: 0.75
   extendDuration: 0.3
   retractDuration: 0.15
+  eatable:
+    serializedVersion: 2
+    m_Bits: 0
+  lickableDoor:
+    serializedVersion: 2
+    m_Bits: 0
   maxDistance: 3
+  maxHitDistance: 10
 --- !u!65 &2643458874277517456
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -207,7 +215,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2778846026511135985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -339,6 +347,10 @@ MonoBehaviour:
   whatStopsMovement:
     serializedVersion: 2
     m_Bits: 8
+  _gridManager: {fileID: 0}
+  _handler: {fileID: 0}
+  coords: {x: 0, y: 0}
+  gridFacing: {x: 0, y: 0}
 --- !u!1 &3286462424699459528
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +379,7 @@ Transform:
   m_GameObject: {fileID: 3286462424699459528}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.729, z: 0.444}
+  m_LocalPosition: {x: 0, y: -0, z: -0.673}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
