@@ -8,12 +8,18 @@ public class TriggerTextPrompt : MonoBehaviour
     public GameObject TriggerCube2;
     public GameObject TriggerCube3;
     public GameObject TriggerCube4;
+    public GameObject TriggerCube5;
+    public GameObject TriggerCube6;
+    public GameObject TriggerCube7;
     
     public string promptText1 = "prompt 1";
     public string promptText2 = "prompt 2";
     public string promptText3 = "prompt 3";
     public string promptText4 = "prompt 4";
-
+    public string promptText5 = "prompt 5";
+    public string promptText6 = "prompt 6";
+    public string promptText7 = "prompt 7";
+    
     public GameObject textPromptUI; 
     public float displayDuration = 3f; 
 
@@ -43,6 +49,21 @@ public class TriggerTextPrompt : MonoBehaviour
             {
                 Debug.Log("TriggerCube4 activated");
                 ShowTextPrompt(promptText4);
+            }
+            else if (gameObject == TriggerCube5)
+            {
+                Debug.Log("TriggerCube5 activated");
+                ShowTextPrompt(promptText5);
+            }
+            else if (gameObject == TriggerCube6)
+            {
+                Debug.Log("TriggerCube6 activated");
+                ShowTextPrompt(promptText6);
+            }
+            else if (gameObject == TriggerCube7)
+            {
+                Debug.Log("TriggerCube7 activated");
+                ShowTextPrompt(promptText7);
             }
             else
             {
