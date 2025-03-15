@@ -22,7 +22,6 @@ public class Tongue : MonoBehaviour
     
     public float maxDistance = 5f;
     public float maxHitDistance = 10f;
-    // public int numberOfLicks;
     
     private bool isInputAllowed = true;
     private bool isObstacleThere = false;
@@ -83,13 +82,21 @@ public class Tongue : MonoBehaviour
                 return;
             }
 
-            // Get the parent of the eatable GameObject
+            // get the parent of the eatable GameObject
             GameObject parentEatable = hit.collider.transform.parent.gameObject;
 
             if (((1 << parentEatable.layer) & eatable) != 0) // Check if the parent is on the Eatable layer
             {
-                // If the parent is eatable, destroy it and its children
+                // if the parent is eatable, destroy it and its children
                 Eat(parentEatable);
+            }
+            
+            Lollipop lollipop = hit.collider.GetComponent<Lollipop>();
+            if (lollipop != null)
+            {
+                // trigger the lollipop's OnTriggerEnter method
+                hit.collider.enabled = false; // disable the collider to prevent multiple triggers
+                lollipop.OnTriggerEnter(hit.collider); 
             }
         }
         else
