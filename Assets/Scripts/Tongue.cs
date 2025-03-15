@@ -22,6 +22,7 @@ public class Tongue : MonoBehaviour
     
     public float maxDistance = 5f;
     public float maxHitDistance = 10f;
+    // public int numberOfLicks;
     
     private bool isInputAllowed = true;
     private bool isObstacleThere = false;
@@ -73,43 +74,42 @@ public class Tongue : MonoBehaviour
     private void PerformRaycast()
     {
         RaycastHit hit;
-        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, maxHitDistance))
+        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, maxHitDistance, 
+                eatable))
         {
-            if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "Eatable")
+            if (hit.collider == null)
             {
-                // if the object is eatable, destroy it
-                Eat(hit.collider.gameObject);
+                Debug.LogWarning("Raycast hit an object without a collider!");
+                return;
             }
-            else if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "LickableDoor")
+
+            // Get the parent of the eatable GameObject
+            GameObject parentEatable = hit.collider.transform.parent.gameObject;
+
+            if (((1 << parentEatable.layer) & eatable) != 0) // Check if the parent is on the Eatable layer
             {
-                // if the object is a lickable door, open it
-                OpenDoor(hit.collider.gameObject);
+                // If the parent is eatable, destroy it and its children
+                Eat(parentEatable);
             }
+        }
+        else
+        {
+            Debug.Log("Raycast did not hit anything.");
         }
     }
 
     void Eat(GameObject obj)
     {
+        // Ensure the object is on the Eatable layer
         if (((1 << obj.layer) & eatable) != 0)
         {
-            Renderer renderer = obj.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                renderer.material.DOFade(0f, 1f).OnComplete(() =>
-                {
-                    Destroy(obj);
-                    Debug.Log(obj.name + " has been eaten!");
-                });
-            }
-            else
-            {
-                Destroy(obj);
-                Debug.Log(obj.name + " has been eaten (no fade)!");
-            }
+            // Destroy the object immediately
+            Destroy(obj);
+            Debug.Log(obj.name + " has been eaten!");
         }
         else
         {
-            Debug.LogWarning("Cannot eat cuz it's not on the Eatable layer!");
+            Debug.LogWarning("Cannot eat " + obj.name + " because it's not on the Eatable layer!");
         }
     }
     

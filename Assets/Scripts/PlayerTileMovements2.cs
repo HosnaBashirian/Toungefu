@@ -8,7 +8,7 @@ public class PlayerTileMovements2 : MonoBehaviour
     public float rotationSpeed = 5f;
     
     public Vector3 spawnPoint = new Vector3(0f, -2f, -40f);
-    private Vector3 targetDirection = Vector3.forward;
+    private Vector3 targetDirection = -Vector3.right;
     private Quaternion targetRotation;
     public Transform movePoint;
 
