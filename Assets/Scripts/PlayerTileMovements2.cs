@@ -21,7 +21,10 @@ public class PlayerTileMovements2 : MonoBehaviour
 
 	public Vector2Int coords;
 	public Vector2Int gridFacing;
-    
+
+	private Vector2Int[] DIR_ENUM;
+	public int facing_index = 0;
+
     void Start()
     {
         movePoint.parent = null;
@@ -32,6 +35,10 @@ public class PlayerTileMovements2 : MonoBehaviour
 		
 		_gridManager = GameObject.Find("GridManager");
 		_handler = _gridManager.GetComponent<Handler>();
+
+		DIR_ENUM = Handler.DIR_ENUM;
+		facing_index = 3;
+		gridFacing = DIR_ENUM[facing_index];
     }
     
     void Update()
@@ -47,16 +54,27 @@ public class PlayerTileMovements2 : MonoBehaviour
             {
                 targetDirection = Quaternion.Euler(0, -90, 0) * targetDirection;
                 UpdateTargetRotation();
+
+				facing_index--;
+				if(facing_index < 0) facing_index = 3;
+				gridFacing = DIR_ENUM[facing_index];
             }
             else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 targetDirection = Quaternion.Euler(0, 90, 0) * targetDirection;
                 UpdateTargetRotation();
+
+				facing_index++;
+				if(facing_index > 3) facing_index = 0;
+				gridFacing = DIR_ENUM[facing_index];
             }
             else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 targetDirection = Quaternion.Euler(0, 180, 0) * targetDirection;
                 UpdateTargetRotation();
+
+				gridFacing = _handler.CoordsScale(gridFacing, -1);
+				for(short i = 0; i < 4; i++) if(_handler.CoordsCompare(DIR_ENUM[i], gridFacing)) facing_index = i;
             }
 
             // handle forward movement 
@@ -76,19 +94,21 @@ public class PlayerTileMovements2 : MonoBehaviour
             }
         }
     }
+
+   	/* 
+    private Vector2Int GetInputDirection()
+    {
+        int horizontal = (int)Input.GetAxisRaw("Horizontal");
+        int vertical = (int)Input.GetAxisRaw("Vertical");
+        
+        if (horizontal != 0)
+        {
+            vertical = 0;
+        }
     
-    // private Vector2Int GetInputDirection()
-    // {
-    //     int horizontal = (int)Input.GetAxisRaw("Horizontal");
-    //     int vertical = (int)Input.GetAxisRaw("Vertical");
-    //     
-    //     if (horizontal != 0)
-    //     {
-    //         vertical = 0;
-    //     }
-    //
-    //     return new Vector2Int(horizontal, vertical);
-    // }
+        return new Vector2Int(horizontal, vertical);
+    }
+	*/
 
     private void UpdateTargetRotation()
     {

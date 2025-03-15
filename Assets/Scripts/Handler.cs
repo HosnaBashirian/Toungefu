@@ -22,19 +22,22 @@ public class Handler : MonoBehaviour {
 	public float tile_size;
 	public TileNode[] tile_arr;
 	
-	public int entity_count;
-	//public Entity[] entity_arr;
-	
 	public List<EntBehaviour> entity_list;
 	
 	public LayerMask _wallMask;
 	public GameObject _wallPrefab;
 
 	public GameObject _player;
+	public PlayerTileMovements2 player_ctl;
+
+	public Vector2Int player_coords;
+	public Vector2Int player_facing;
+
+	public short player_atk_range = 2;
 
     void Start() {
-		_player = GameObject.Find("Player");		
-		entity_count = 0;
+		_player = GameObject.Find("Player");
+		player_ctl = _player.GetComponent<PlayerTileMovements2>();
 
 		map_w+=2;
 		map_h+=2;
@@ -44,18 +47,6 @@ public class Handler : MonoBehaviour {
 	public void GenerateMap() {
 		tile_count = map_w * map_h;				// Get surface area
 		tile_arr = new TileNode[tile_count];	// Initialize tile list	
-
-		Vector2Int pivot_test_pos0 = Vec3ToGrid(new Vector3(8.0f, 1.1f, -17.0f));
-		Vector3 piv_test0 = GridToVec3(pivot_test_pos0);
-		piv_test0.y = 3;
-		Instantiate(_wallPrefab, piv_test0, Quaternion.identity);
-		Debug.Log($"Sour pivot0: {pivot_test_pos0}");
-
-		Vector2Int pivot_test_pos1 = Vec3ToGrid(new Vector3(8.0f, 1.1f, -11.0f));
-		Vector3 piv_test1 = GridToVec3(pivot_test_pos1);
-		piv_test1.y = 3;
-		Instantiate(_wallPrefab, piv_test1, Quaternion.identity);
-		Debug.Log($"Sour pivot1: {pivot_test_pos1}");
 
 		// Place tiles and check for walls 
 		for(short i = 0; i < tile_count; i++) {
@@ -70,25 +61,63 @@ public class Handler : MonoBehaviour {
 			bool is_wall = false;
 			if(Physics.CheckBox(collisionTest, collTestSize, Quaternion.identity, _wallMask, QueryTriggerInteraction.Ignore)) {
 				is_wall = true;
-				/*
-				Vector3 pos = GridToVec3(coords);
-				pos.y = 3;
-				Instantiate(_wallPrefab, pos, Quaternion.identity);
-				*/
-				//Debug.Log($"Added wall at {coords}, {collisionTest}");
 			}
 
-			TileNode newTile = new TileNode(is_wall, coords, new int[4]);		// Initialize tile 
-			tile_arr[i] = newTile;												// Place tile in array
+			TileNode newTile = new TileNode(is_wall, coords);	// Initialize tile 
+			tile_arr[i] = newTile;								// Place tile in array
 		}
+
+		RefreshTiles(false);
 	}
 
 	public void ProcessTurn() {
 		Debug.Log("Processing turn...");
+		
+		// Update Player position
+		player_coords = Vec3ToGrid(_player.transform.position);
+		Debug.Log($"Player Position: {player_coords}");
+
+		RefreshTiles(true);
+		
+		// Check collisions
+		if(tile_arr[CoordsToIndex(player_coords)].hazard) {
+			// Kill player...
+			Debug.Log($"Player collided with enemy at {player_coords}!");
+			LevelReset();
+		}
+	}
+
+	public void RefreshTiles(bool tick_enemies) {
+		for(int i = 0; i < tile_count; i++) 
+			tile_arr[i].hazard = false;
 
 		for(short i = 0; i < entity_list.Count; i++) {
-			entity_list[i].Tick();
+			if(tick_enemies) entity_list[i].Tick();
+			
+			TileNode tile = tile_arr[CoordsToIndex(entity_list[i].coords)];
+			tile.hazard = true;
 		}
+
+		_player.GetComponent<PlayerTileMovements2>().coords = player_coords;
+	}
+
+	public void ProcessPlayerAttack() {
+		// Find which tiles are hit 
+		Vector2Int[] tile_hit = new Vector2Int[2] {
+			CoordsAdd(player_coords, CoordsScale(player_facing, 1)),
+			CoordsAdd(player_coords, CoordsScale(player_facing, 2))
+		};
+	}
+
+	public void LevelReset() {
+		_player.transform.position = player_ctl.spawnPoint;
+		player_ctl.movePoint.position = player_ctl.spawnPoint;
+
+		for(short i = 0; i < entity_list.Count; i++) {
+			entity_list[i].coords = entity_list[i].start_coords;
+		}
+
+		RefreshTiles(false);
 	}
 
 	// ----------------------------------------------------------------------------------------------------- //
@@ -134,8 +163,16 @@ public class Handler : MonoBehaviour {
 		return new Vector2Int(a.x + b.x, a.y + b.y);
 	}
 
+	public Vector2Int CoordsSubtract(Vector2Int a, Vector2Int b) {
+		return new Vector2Int(a.x - b.x, a.y - b.y);
+	}
+
 	public bool CoordsCompare(Vector2Int a, Vector2Int b) {
 		return(a.x - b.x == 0 && a.y - b.y == 0);
+	}
+
+	public Vector2Int CoordsScale(Vector2Int coords, int scale) {
+		return new Vector2Int(coords.x * scale, coords.y * scale);
 	}
 
 	//
@@ -144,14 +181,14 @@ public class Handler : MonoBehaviour {
 }
 
 public class TileNode {
-	bool isWall;		  	// Can an entity move through this tile
-	Vector2Int coords;		// Grid position of tile
-	int[] entityIndices;	// List of entities contained in this tile
+	public bool is_wall;		  	// Can an entity move through this tile
+	public bool hazard;				// Will the tile damage the player when landing on it
+	public Vector2Int coords;		// Grid position of tile
+	public short enemy_index; 		// Index of enemy on this tile, -1 if empty
 
-	public TileNode(bool _wall, Vector2Int _coords, int[] _ent_indices){
-		this.isWall = _wall;
+	public TileNode(bool _wall, Vector2Int _coords) {
+		this.is_wall = _wall;
 		this.coords = _coords;
-		this.entityIndices = _ent_indices;
 	}
 }
 
