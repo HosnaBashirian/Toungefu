@@ -25,11 +25,14 @@ public class Tongue : MonoBehaviour
     
     private bool isInputAllowed = true;
     private bool isObstacleThere = false;
-    
+
+	private Handler _handler;	
+
     void Start()
     {
         originalTonguePosition = transform.localPosition;
-        
+
+       	_handler = GameObject.Find("GridManager").GetComponent<Handler>(); 
     }
     
     void Update()
@@ -47,7 +50,8 @@ public class Tongue : MonoBehaviour
             {
                 LickAnimation();
             }
-        }
+
+			_handler.ProcessPlayerAttack(); }
     }
 
     private void LickAnimation()  // scale and shoot forward
@@ -111,7 +115,7 @@ public class Tongue : MonoBehaviour
         if (((1 << obj.layer) & eatable) != 0)
         {
             // Destroy the object immediately
-            Destroy(obj);
+            //Destroy(obj);
             Debug.Log(obj.name + " has been eaten!");
         }
         else

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class Handler : MonoBehaviour {
 	// Grid direction definitions
-	public static Vector2Int NORTH = new Vector2Int(  0, -1 );
+	public static Vector2Int NORTH = new Vector2Int(  0,  1 );
 	public static Vector2Int EAST  = new Vector2Int( -1,  0 );
-	public static Vector2Int SOUTH = new Vector2Int(  0,  1 );
+	public static Vector2Int SOUTH = new Vector2Int(  0, -1 );
 	public static Vector2Int WEST  = new Vector2Int(  1,  0 );
 	public static Vector2Int[] DIR_ENUM = new Vector2Int[] { NORTH, EAST, SOUTH, WEST };
 
@@ -88,25 +88,54 @@ public class Handler : MonoBehaviour {
 	}
 
 	public void RefreshTiles(bool tick_enemies) {
-		for(int i = 0; i < tile_count; i++) 
+		// Clean data
+		for(int i = 0; i < tile_count; i++) { 
 			tile_arr[i].hazard = false;
-
-		for(short i = 0; i < entity_list.Count; i++) {
-			if(tick_enemies) entity_list[i].Tick();
-			
-			TileNode tile = tile_arr[CoordsToIndex(entity_list[i].coords)];
-			tile.hazard = true;
+			tile_arr[i].enemy_index = -1;
 		}
+		
+		// Write data
+		for(short i = 0; i < entity_list.Count; i++) {
+			if(entity_list[i].active) {
+				if(tick_enemies) entity_list[i].Tick();
+				
+				TileNode tile = tile_arr[CoordsToIndex(entity_list[i].coords)];
+				tile.hazard = true;
 
-		_player.GetComponent<PlayerTileMovements2>().coords = player_coords;
+				tile.enemy_index = i;
+				Debug.Log($"Enemy[{i}] located at: {tile.coords}");
+			}
+		}
 	}
 
 	public void ProcessPlayerAttack() {
+		player_facing = player_ctl.gridFacing;
+		RefreshTiles(false);
+
 		// Find which tiles are hit 
-		Vector2Int[] tile_hit = new Vector2Int[2] {
-			CoordsAdd(player_coords, CoordsScale(player_facing, 1)),
-			CoordsAdd(player_coords, CoordsScale(player_facing, 2))
-		};
+		Vector2Int[] tile_hit = new Vector2Int[4];
+		Vector2Int prev_check = CoordsAdd(player_coords, new Vector2Int(-1, 0));
+		for(short i = 0; i < 4; i++) {
+			//tile_hit[i] = CoordsAdd(new Vector2Int(player_coords.x-1, player_coords.y), CoordsScale(player_facing, i+1));
+			//Debug.Log($"Collision check set for: {tile_hit[i]}");
+
+			tile_hit[i] = CoordsAdd(prev_check, player_facing);
+			prev_check = tile_hit[i];
+		}
+
+		for(short i = 0; i < 4; i++) {
+			if(CoordsToIndex(tile_hit[i]) >= 0 && CoordsToIndex(tile_hit[i]) <= tile_count) {
+				TileNode tile = tile_arr[CoordsToIndex(tile_hit[i])];
+				Debug.Log($"Attack collision testing at {tile.coords}");
+
+				if(tile.enemy_index > -1) {
+					Debug.Log($"Hit enemy at {tile_hit[i]}!");
+					entity_list[tile.enemy_index].Kill();
+				}
+			}
+		}
+
+		RefreshTiles(false);
 	}
 
 	public void LevelReset() {
@@ -115,6 +144,9 @@ public class Handler : MonoBehaviour {
 
 		for(short i = 0; i < entity_list.Count; i++) {
 			entity_list[i].coords = entity_list[i].start_coords;
+			entity_list[i].active = true;
+			if(entity_list[i].type > 0) entity_list[i].GetComponentInChildren<MeshRenderer>().enabled = true;
+			entity_list[i].Init();
 		}
 
 		RefreshTiles(false);

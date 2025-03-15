@@ -31,7 +31,7 @@ public class Labeler : MonoBehaviour
     coords.x = Mathf.RoundToInt(transform.position.x / gridManager.UnityGridSize);
     coords.y = Mathf.RoundToInt(transform.position.z / gridManager.UnityGridSize);
 
-    label.text = $"{coords.x}. {coords.y}";
+    //label.text = $"{coords.x}. {coords.y}";
   }
 
 }

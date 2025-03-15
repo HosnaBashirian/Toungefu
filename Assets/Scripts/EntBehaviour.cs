@@ -5,6 +5,8 @@ public class EntBehaviour : MonoBehaviour {
 	public Handler _handler;
 	public PlayerTileMovements2 _player;
 
+	public bool active = true;	
+
 	public int index;
 	public short id;
 	public short type;
@@ -31,9 +33,11 @@ public class EntBehaviour : MonoBehaviour {
 	   	Init();
     }
 
-	private void Init() {
+	public void Init() {
 		coords = _handler.Vec3ToGrid(gameObject.transform.position);
 		start_coords = coords;
+
+		active = true;
 
 		switch(type) {
 			case 0:
@@ -95,6 +99,18 @@ public class EntBehaviour : MonoBehaviour {
 
 	private void BreakerTick() {
 
+	}
+
+	public void Kill() {
+		active = false;
+		//mesh_rend.enabled = false;
+		
+		TileNode tile = _handler.tile_arr[_handler.CoordsToIndex(coords)];
+		tile.hazard = false;
+		tile.enemy_index = -1;
+		
+		for(short i = 0; i < 2; i++) 
+			if(type > 0) gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
 	}
 }
 
