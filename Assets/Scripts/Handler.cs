@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Handler : MonoBehaviour {
 	// Grid direction definitions
@@ -22,7 +23,9 @@ public class Handler : MonoBehaviour {
 	public TileNode[] tile_arr;
 	
 	public int entity_count;
-	public Entity[] entity_arr;
+	//public Entity[] entity_arr;
+	
+	public List<EntBehaviour> entity_list;
 	
 	public LayerMask _wallMask;
 	public GameObject _wallPrefab;
@@ -42,6 +45,18 @@ public class Handler : MonoBehaviour {
 		tile_count = map_w * map_h;				// Get surface area
 		tile_arr = new TileNode[tile_count];	// Initialize tile list	
 
+		Vector2Int pivot_test_pos0 = Vec3ToGrid(new Vector3(8.0f, 1.1f, -17.0f));
+		Vector3 piv_test0 = GridToVec3(pivot_test_pos0);
+		piv_test0.y = 3;
+		Instantiate(_wallPrefab, piv_test0, Quaternion.identity);
+		Debug.Log($"Sour pivot0: {pivot_test_pos0}");
+
+		Vector2Int pivot_test_pos1 = Vec3ToGrid(new Vector3(8.0f, 1.1f, -11.0f));
+		Vector3 piv_test1 = GridToVec3(pivot_test_pos1);
+		piv_test1.y = 3;
+		Instantiate(_wallPrefab, piv_test1, Quaternion.identity);
+		Debug.Log($"Sour pivot1: {pivot_test_pos1}");
+
 		// Place tiles and check for walls 
 		for(short i = 0; i < tile_count; i++) {
 			Vector2Int coords = IndexToCoords(i);	// Get grid position
@@ -55,12 +70,12 @@ public class Handler : MonoBehaviour {
 			bool is_wall = false;
 			if(Physics.CheckBox(collisionTest, collTestSize, Quaternion.identity, _wallMask, QueryTriggerInteraction.Ignore)) {
 				is_wall = true;
+				/*
+				Vector3 pos = GridToVec3(coords);
+				pos.y = 3;
+				Instantiate(_wallPrefab, pos, Quaternion.identity);
+				*/
 				//Debug.Log($"Added wall at {coords}, {collisionTest}");
-			}
-
-			// Check for entities
-			if(Physics.CheckBox(collisionTest, collTestSize, Quaternion.identity, _wallMask, QueryTriggerInteraction.Ignore)) {
-				Debug.Log($"Added entity of type {0} at {coords}");
 			}
 
 			TileNode newTile = new TileNode(is_wall, coords, new int[4]);		// Initialize tile 
@@ -70,22 +85,10 @@ public class Handler : MonoBehaviour {
 
 	public void ProcessTurn() {
 		Debug.Log("Processing turn...");
-	}
-	
-	// ----------------------------------------------------------------------------------------------------- //
-	// 							      **[ENEMY BEHAVIOUR FUNCTIONS]**
-	// ----------------------------------------------------------------------------------------------------- //
 
-	public void BonbonUpdate(int index) {
-
-	}
-
-	public void WormUpdate(int index) {
-
-	}
-
-	public void BreakerUpdtate(int index) {
-
+		for(short i = 0; i < entity_list.Count; i++) {
+			entity_list[i].Tick();
+		}
 	}
 
 	// ----------------------------------------------------------------------------------------------------- //
@@ -127,6 +130,14 @@ public class Handler : MonoBehaviour {
 				min_a.z <= max_b.z && min_a.z >= min_b.z );
 	}
 
+	public Vector2Int CoordsAdd(Vector2Int a, Vector2Int b) {
+		return new Vector2Int(a.x + b.x, a.y + b.y);
+	}
+
+	public bool CoordsCompare(Vector2Int a, Vector2Int b) {
+		return(a.x - b.x == 0 && a.y - b.y == 0);
+	}
+
 	//
 	// ----------------------------------------------------------------------------------------------------- //
 	// ----------------------------------------------------------------------------------------------------- //
@@ -141,21 +152,6 @@ public class TileNode {
 		this.isWall = _wall;
 		this.coords = _coords;
 		this.entityIndices = _ent_indices;
-	}
-}
-
-public class Entity {
-	short id;
-	bool active;
-	Vector2Int coords;
-	Vector2Int facing;
-	Vector2Int start_coords;
-	GameObject obj;
-
-	public Entity(GameObject obj, short id, Vector2Int coords) {
-		this.id = id;
-		this.coords = coords;
-		this.start_coords = coords;
 	}
 }
 
