@@ -9814,8 +9814,8 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: 
-  promptText4: These guys ain't sweet like me!
+  promptText3: These guys ain't sweet like me!
+  promptText4: prompt 4
   promptText5: prompt 5
   promptText6: prompt 6
   promptText7: prompt 7
@@ -17616,10 +17616,10 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: 
+  promptText3: Ponder the slabs, solve the riddle...
   promptText4: prompt 4
   promptText5: prompt 5
-  promptText6: Ponder the slabs, solve the riddle...
+  promptText6: prompt 6
   promptText7: prompt 7
   textPromptUI: {fileID: 1238609603}
   displayDuration: 2.5
@@ -17779,11 +17779,11 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: 
+  promptText3: Past this door awaits your doom. Best of luck little frog.
   promptText4: prompt 4
   promptText5: prompt 5
   promptText6: prompt 6
-  promptText7: Past this door awaits your doom. Best of luck little frog.
+  promptText7: prompt 7
   textPromptUI: {fileID: 1238609603}
   displayDuration: 3
 --- !u!65 &1708117646
@@ -21754,7 +21754,7 @@ MonoBehaviour:
   promptText2: prompt 2
   promptText3: AHHHH COLD
   promptText4: prompt 4
-  promptText5: AHHHH COLD
+  promptText5: prompt 5
   promptText6: prompt 6
   promptText7: prompt 7
   textPromptUI: {fileID: 1238609603}
