@@ -6,15 +6,19 @@ public class LickLockController : MonoBehaviour
     public GameObject lockObject;
     public GameObject doorObject;
     public TextMeshProUGUI messageText;
+    public AudioSource doorAudio;
     public float messageDuration = 2f;
 
     private bool isLockDestroyed = false;
+    private bool doorOpened = false;
 
     private void Update()
     {
-        if (lockObject == null && !isLockDestroyed)
+        if (lockObject == null && !isLockDestroyed && !doorOpened)
         {
+            doorOpened = true;
             isLockDestroyed = true;
+            PlayDoorSound();
             OpenDoor();
         }
     }
@@ -61,6 +65,14 @@ public class LickLockController : MonoBehaviour
         if (messageText != null)
         {
             messageText.gameObject.SetActive(false);
+        }
+    }
+    
+    void PlayDoorSound()
+    {
+        if (doorAudio)
+        {
+            doorAudio.Play();
         }
     }
 }

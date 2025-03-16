@@ -5,15 +5,19 @@ public class DoorEatBonbon : MonoBehaviour
 {
     public GameObject bonBon;
     public TextMeshProUGUI messageText;
+    public AudioSource doorAudio;
     public float messageDuration = 2f;
     private bool messageShown = false;
+    private bool doorOpened = false;
 
     private void Update()
     {
-        if (bonBon == null && !messageShown) 
+        if (bonBon == null && !messageShown && !doorOpened)
         {
+            doorOpened = true;
             messageShown = true;
             ShowMessage("The door is now open. You may proceed to the next puzzle.");
+            PlayDoorSound();
         }
     }
 
@@ -33,6 +37,14 @@ public class DoorEatBonbon : MonoBehaviour
         {
             messageText.gameObject.SetActive(false);
             Destroy(gameObject);
+        }
+    }
+    
+    void PlayDoorSound()
+    {
+        if (doorAudio)
+        {
+            doorAudio.Play();
         }
     }
 }

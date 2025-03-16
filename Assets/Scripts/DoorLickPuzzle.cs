@@ -4,8 +4,10 @@ using TMPro;
 public class DoorLickPuzzle : MonoBehaviour
 {
     public TextMeshProUGUI messageText;
+    public AudioSource doorAudio;
     public float messageDuration = 2f;
     private bool messageShown = false;
+    private bool doorOpened = false;
 
     public string[] correctOrder = { "Red", "Yellow", "Green", "Blue" };
     private int currentOrderIndex = 0;
@@ -15,10 +17,12 @@ public class DoorLickPuzzle : MonoBehaviour
 
     private void Update()
     {
-        if (currentOrderIndex == correctOrder.Length && !messageShown)
+        if (currentOrderIndex == correctOrder.Length && !messageShown  && !doorOpened)
         {
+            doorOpened = true;
             messageShown = true;
             ShowMessage("The door is now open. You may proceed to the next puzzle.");
+            PlayDoorSound();
             OpenDoor();
         }
         
@@ -102,6 +106,14 @@ public class DoorLickPuzzle : MonoBehaviour
             currentOrderIndex = 0;
             Debug.Log("Wrong order! Sequence reset.");
             ShowMessage("Wrong order! Try again.");
+        }
+    }
+    
+    void PlayDoorSound()
+    {
+        if (doorAudio)
+        {
+            doorAudio.Play();
         }
     }
 }
