@@ -115,7 +115,7 @@ public class Tongue : MonoBehaviour
         if (((1 << obj.layer) & eatable) != 0)
         {
             // Destroy the object immediately
-            //Destroy(obj);
+            Destroy(obj);
             Debug.Log(obj.name + " has been eaten!");
         }
         else
