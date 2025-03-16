@@ -3656,7 +3656,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3741,16 +3741,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1673151512}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 99.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -0.01999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23811245
+      value: 0.124
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.014655
+      value: -1.9553452
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4166,16 +4170,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1673151512}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 99.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -0.01999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23811245
+      value: 0.124
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.97
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b5b74370fbc29440bbb224ebaa54538, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9563,13 +9571,13 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: prompt 3
+  promptText3: These guys ain't sweet like me!
   promptText4: prompt 4
   promptText5: prompt 5
   promptText6: prompt 6
   promptText7: prompt 7
   textPromptUI: {fileID: 1238609603}
-  displayDuration: 3
+  displayDuration: 2.5
 --- !u!65 &959705803
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12413,8 +12421,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.55, y: 70.8}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -134.9}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1238609605
 MonoBehaviour:
@@ -12469,8 +12477,8 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 16
-  m_HorizontalAlignment: 1
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -12501,7 +12509,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -107.874146, y: 0, z: -107.9382, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12918,6 +12926,114 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afb4b10981961f446b5658c5aafaa900, type: 3}
+--- !u!1 &1283315419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283315420}
+  - component: {fileID: 1283315423}
+  - component: {fileID: 1283315422}
+  - component: {fileID: 1283315421}
+  m_Layer: 0
+  m_Name: Riddle2Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1283315420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283315419}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 1.07, z: 2.000001}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1673151512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1283315421
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283315419}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1283315422
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283315419}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1283315423
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283315419}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1289484927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1acedd38b2bfc6f46aa51cc5922a6698, type: 3}
@@ -14237,7 +14353,7 @@ MonoBehaviour:
   TriggerCube6: {fileID: 1701233911}
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
-  promptText2: prompt 2
+  promptText2: Sometimes you gotta chase down your new friends!
   promptText3: prompt 3
   promptText4: prompt 4
   promptText5: prompt 5
@@ -16422,7 +16538,7 @@ MonoBehaviour:
   TriggerCube5: {fileID: 2145640753}
   TriggerCube6: {fileID: 1701233911}
   TriggerCube7: {fileID: 1708117644}
-  promptText1: prompt 1
+  promptText1: Hey there buddy! Try Pressing "L" to interact with me!
   promptText2: prompt 2
   promptText3: prompt 3
   promptText4: prompt 4
@@ -16637,12 +16753,14 @@ Transform:
   m_GameObject: {fileID: 1673151511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.98, y: 0, z: 14.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 354941202}
   - {fileID: 263071151}
+  - {fileID: 1915104965}
+  - {fileID: 1283315420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1673455414 stripped
@@ -16826,13 +16944,13 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: prompt 3
+  promptText3: Ponder the slabs, solve the riddle...
   promptText4: prompt 4
   promptText5: prompt 5
   promptText6: prompt 6
   promptText7: prompt 7
   textPromptUI: {fileID: 1238609603}
-  displayDuration: 3
+  displayDuration: 2.5
 --- !u!65 &1701233913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16989,7 +17107,7 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: prompt 3
+  promptText3: Past this door awaits your doom. Best of luck little frog.
   promptText4: prompt 4
   promptText5: prompt 5
   promptText6: prompt 6
@@ -18119,13 +18237,13 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: prompt 3
+  promptText3: I was never good with riddles...
   promptText4: prompt 4
   promptText5: prompt 5
   promptText6: prompt 6
   promptText7: prompt 7
   textPromptUI: {fileID: 1238609603}
-  displayDuration: 3
+  displayDuration: 2.5
 --- !u!1 &1829935954
 GameObject:
   m_ObjectHideFlags: 0
@@ -18916,6 +19034,114 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.10714995, y: 0.028979523, z: 0.020873621}
   m_Center: {x: 0.00010222003, y: -0.0041322657, z: -0.058983266}
+--- !u!1 &1915104964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1915104965}
+  - component: {fileID: 1915104968}
+  - component: {fileID: 1915104967}
+  - component: {fileID: 1915104966}
+  m_Layer: 0
+  m_Name: Riddle1Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1915104965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915104964}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 1.07, z: -2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1673151512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1915104966
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915104964}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1915104967
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915104964}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1915104968
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915104964}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1922293896 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 61703741823206121, guid: 444a365821a72ca44ab485cdddb11b6e, type: 3}
@@ -19913,7 +20139,7 @@ Transform:
   m_GameObject: {fileID: 2034140977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: -0.21, z: 4}
+  m_LocalPosition: {x: 1, y: -0.45, z: 4}
   m_LocalScale: {x: 60, y: 1, z: 60}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20736,7 +20962,7 @@ MonoBehaviour:
   TriggerCube7: {fileID: 1708117644}
   promptText1: prompt 1
   promptText2: prompt 2
-  promptText3: prompt 3
+  promptText3: AHHHH COLD
   promptText4: prompt 4
   promptText5: prompt 5
   promptText6: prompt 6
