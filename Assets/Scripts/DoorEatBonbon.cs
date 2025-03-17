@@ -13,7 +13,17 @@ public class DoorEatBonbon : MonoBehaviour
 
     private void Update()
     {
+		/*
         if (bonBon == null && !messageShown && !doorOpened)
+        {
+            doorOpened = true;
+            messageShown = true;
+            ShowMessage("The door is now open. You may proceed to the next puzzle.");
+            PlayDoorSound();
+        }
+		*/
+
+        if (!bonBon.GetComponent<EntBehaviour>().active && !messageShown && !doorOpened)
         {
             doorOpened = true;
             messageShown = true;

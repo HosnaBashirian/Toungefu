@@ -33,7 +33,8 @@ public class Handler : MonoBehaviour {
 	public Vector2Int player_coords;
 	public Vector2Int player_facing;
 
-	public short player_atk_range = 2;
+	public short player_atk_range = 3;
+	public short in_room = 0;
 
     void Start() {
 		_player = GameObject.Find("Player");
@@ -85,6 +86,8 @@ public class Handler : MonoBehaviour {
 			Debug.Log($"Player collided with enemy at {player_coords}!");
 			LevelReset();
 		}
+
+		RefreshTiles(false);
 	}
 
 	public void RefreshTiles(bool tick_enemies) {
@@ -96,14 +99,14 @@ public class Handler : MonoBehaviour {
 		
 		// Write data
 		for(short i = 0; i < entity_list.Count; i++) {
-			if(entity_list[i].active) {
+			if(entity_list[i].active && entity_list[i].room == in_room) {
 				if(tick_enemies) entity_list[i].Tick();
 				
 				TileNode tile = tile_arr[CoordsToIndex(entity_list[i].coords)];
 				tile.hazard = true;
 
 				tile.enemy_index = i;
-				Debug.Log($"Enemy[{i}] located at: {tile.coords}");
+				//Debug.Log($"Enemy[{i}] located at: {tile.coords}");
 			}
 		}
 	}
@@ -113,17 +116,21 @@ public class Handler : MonoBehaviour {
 		RefreshTiles(false);
 
 		// Find which tiles are hit 
-		Vector2Int[] tile_hit = new Vector2Int[4];
+		Vector2Int[] tile_hit = new Vector2Int[player_atk_range];
 		Vector2Int prev_check = CoordsAdd(player_coords, new Vector2Int(-1, 0));
-		for(short i = 0; i < 4; i++) {
+		//Vector2Int prev_check = CoordsSubtract(player_coords, player_facing);
+
+		prev_check = CoordsSubtract(prev_check, player_facing);
+
+		for(short i = 0; i < player_atk_range; i++) {
 			//tile_hit[i] = CoordsAdd(new Vector2Int(player_coords.x-1, player_coords.y), CoordsScale(player_facing, i+1));
-			//Debug.Log($"Collision check set for: {tile_hit[i]}");
 
 			tile_hit[i] = CoordsAdd(prev_check, player_facing);
 			prev_check = tile_hit[i];
+			Debug.Log($"Collision check set for: {tile_hit[i]}");
 		}
 
-		for(short i = 0; i < 4; i++) {
+		for(short i = 0; i < player_atk_range; i++) {
 			if(CoordsToIndex(tile_hit[i]) >= 0 && CoordsToIndex(tile_hit[i]) <= tile_count) {
 				TileNode tile = tile_arr[CoordsToIndex(tile_hit[i])];
 				Debug.Log($"Attack collision testing at {tile.coords}");
@@ -131,6 +138,7 @@ public class Handler : MonoBehaviour {
 				if(tile.enemy_index > -1) {
 					Debug.Log($"Hit enemy at {tile_hit[i]}!");
 					entity_list[tile.enemy_index].Kill();
+					break;
 				}
 			}
 		}

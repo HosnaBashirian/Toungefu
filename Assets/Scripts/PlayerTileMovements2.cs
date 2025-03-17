@@ -95,21 +95,6 @@ public class PlayerTileMovements2 : MonoBehaviour
         }
     }
 
-   	/* 
-    private Vector2Int GetInputDirection()
-    {
-        int horizontal = (int)Input.GetAxisRaw("Horizontal");
-        int vertical = (int)Input.GetAxisRaw("Vertical");
-        
-        if (horizontal != 0)
-        {
-            vertical = 0;
-        }
-    
-        return new Vector2Int(horizontal, vertical);
-    }
-	*/
-
     private void UpdateTargetRotation()
     {
         targetRotation = Quaternion.LookRotation(targetDirection);

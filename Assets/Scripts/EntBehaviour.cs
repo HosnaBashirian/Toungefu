@@ -19,8 +19,15 @@ public class EntBehaviour : MonoBehaviour {
 
 	public Vector2Int[] pivot_moves;
 	public short piv_index = 0;
+	public short start_piv_index = 0;
+
+	bool piv_set = false;
 
 	private Vector3 look_target;
+
+	float start_y;
+	
+	public short room;
 
     void Start() {
        	_handler = GameObject.Find("GridManager").GetComponent<Handler>();
@@ -29,6 +36,8 @@ public class EntBehaviour : MonoBehaviour {
 		// Add this enemy to the enemy list
 		index = _handler.entity_list.Count;
 	   	_handler.entity_list.Add(this);
+
+		start_y = transform.position.y;
 		
 	   	Init();
     }
@@ -37,6 +46,8 @@ public class EntBehaviour : MonoBehaviour {
 		coords = _handler.Vec3ToGrid(gameObject.transform.position);
 		start_coords = coords;
 
+		transform.position = new Vector3(transform.position.x, start_y, transform.position.z);
+
 		active = true;
 
 		switch(type) {
@@ -44,16 +55,22 @@ public class EntBehaviour : MonoBehaviour {
 				break;
 
 			case 1:
-				// Set movement array values, the enemy will iterate linearly through array on every Handler.Tick()
-				pivot_moves = new Vector2Int[8] {
-					_handler.CoordsAdd(pivot_point, new Vector2Int(  0, -1 )), _handler.CoordsAdd(pivot_point, new Vector2Int(  1, -1 )),
-					_handler.CoordsAdd(pivot_point, new Vector2Int(  1,  0 )), _handler.CoordsAdd(pivot_point, new Vector2Int(  1,  1 )),
-					_handler.CoordsAdd(pivot_point, new Vector2Int(  0,  1 )), _handler.CoordsAdd(pivot_point, new Vector2Int( -1,  1 )),
-					_handler.CoordsAdd(pivot_point, new Vector2Int( -1,  0 )), _handler.CoordsAdd(pivot_point, new Vector2Int( -1, -1 ))
-				};
-
-				// Check which index in the array, the enemy is in on start 
-				for(short i = 0; i < 8; i++) if(_handler.CoordsCompare(coords, pivot_moves[i])) piv_index = i;
+				if(!piv_set) {
+					// Set movement array values, the enemy will iterate linearly through array on every Handler.Tick()
+					pivot_moves = new Vector2Int[8] {
+						_handler.CoordsAdd(pivot_point, new Vector2Int(  0, -1 )), _handler.CoordsAdd(pivot_point, new Vector2Int(  1, -1 )),
+						_handler.CoordsAdd(pivot_point, new Vector2Int(  1,  0 )), _handler.CoordsAdd(pivot_point, new Vector2Int(  1,  1 )),
+						_handler.CoordsAdd(pivot_point, new Vector2Int(  0,  1 )), _handler.CoordsAdd(pivot_point, new Vector2Int( -1,  1 )),
+						_handler.CoordsAdd(pivot_point, new Vector2Int( -1,  0 )), _handler.CoordsAdd(pivot_point, new Vector2Int( -1, -1 ))
+					};
+					// Check which index in the array, the enemy is in on start 
+					for(short i = 0; i < 8; i++) if(_handler.CoordsCompare(coords, pivot_moves[i])) piv_index = i;
+					start_piv_index = piv_index;	
+					piv_set = true;
+				} else {
+					piv_index = start_piv_index;
+					coords = pivot_moves[piv_index];
+				}
 
 				break;
 
@@ -72,7 +89,7 @@ public class EntBehaviour : MonoBehaviour {
 	}
 	
 	private void BonbonTick() {
-
+		
 	}
 
 	private void SourTick() {
@@ -108,9 +125,12 @@ public class EntBehaviour : MonoBehaviour {
 		TileNode tile = _handler.tile_arr[_handler.CoordsToIndex(coords)];
 		tile.hazard = false;
 		tile.enemy_index = -1;
-		
+		/*	
 		for(short i = 0; i < 2; i++) 
 			if(type > 0) gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+		*/
+
+		transform.position = new Vector3(transform.position.x, -10, transform.position.z);	
 	}
 }
 
