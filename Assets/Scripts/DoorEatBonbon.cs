@@ -6,6 +6,7 @@ public class DoorEatBonbon : MonoBehaviour
     public GameObject bonBon;
     public TextMeshProUGUI messageText;
     public AudioSource doorAudio;
+    public AudioSource munchAudio;
     public float messageDuration = 2f;
     private bool messageShown = false;
     private bool doorOpened = false;
@@ -45,6 +46,14 @@ public class DoorEatBonbon : MonoBehaviour
         if (doorAudio)
         {
             doorAudio.Play();
+        }
+    }
+
+    void PlayMunchSound()
+    {
+        if (munchAudio)
+        {
+            munchAudio.Play();
         }
     }
 }

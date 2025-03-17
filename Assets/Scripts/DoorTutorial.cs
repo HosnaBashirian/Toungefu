@@ -8,6 +8,7 @@ public class DoorTutorial : MonoBehaviour
     public Animator doorLeftAnimator;
     public Animator doorRightAnimator;
     public AudioSource doorAudio;
+    public AudioSource munchAudio;
     public float messageDuration = 2f;
     private bool messageShown = false;
     private bool doorOpened = false;
@@ -51,7 +52,8 @@ public class DoorTutorial : MonoBehaviour
     void HideMessage()
     {
         messageText.gameObject.SetActive(false);
-        
+
+        PlayMunchSound();
         Destroy(gameObject);
     }
     
@@ -70,6 +72,14 @@ public class DoorTutorial : MonoBehaviour
     void PlayDoorSound()
     {
         if (doorAudio)
+        {
+            doorAudio.Play();
+        }
+    }
+
+    void PlayMunchSound()
+    {
+        if (munchAudio)
         {
             doorAudio.Play();
         }

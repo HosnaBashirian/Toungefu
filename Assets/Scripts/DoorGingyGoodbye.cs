@@ -6,6 +6,7 @@ public class DoorGingyGoodbye : MonoBehaviour
     public GameObject gingy;
     public TextMeshProUGUI messageText;
     public AudioSource doorAudio;
+    public AudioSource munchAudio;
     public float messageDuration = 2f;
     private bool messageShown = false;
     private bool doorOpened = false;
@@ -44,7 +45,8 @@ public class DoorGingyGoodbye : MonoBehaviour
     void HideMessage()
     {
         messageText.gameObject.SetActive(false);
-        
+
+        PlayMunchSound();
         Destroy(gameObject);
     }
     
@@ -53,6 +55,14 @@ public class DoorGingyGoodbye : MonoBehaviour
         if (doorAudio)
         {
             doorAudio.Play();
+        }
+    }
+
+    void PlayMunchSound()
+    {
+        if (munchAudio)
+        {
+            munchAudio.Play();
         }
     }
 }

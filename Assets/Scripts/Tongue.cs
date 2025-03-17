@@ -6,6 +6,8 @@ public class Tongue : MonoBehaviour
 {
     private Rigidbody rb;
     public PlayerTileMovements2 player;
+    public AudioSource lickSound;
+    public AudioSource munchSound;
 
     public float extendedDistance = 2f;
     public float extendDuration = 0.3f;
@@ -48,6 +50,7 @@ public class Tongue : MonoBehaviour
             }
             else
             {
+                // PlayLickSound();
                 LickAnimation();
             }
 
@@ -113,12 +116,29 @@ public class Tongue : MonoBehaviour
     {
         if (((1 << obj.layer) & eatable) != 0)
         {
+            PlayMunchSound();
             Destroy(obj);
             Debug.Log(obj.name + " has been eaten!");
         }
         else
         {
             Debug.LogWarning("Cannot eat " + obj.name + " because it's not on the Eatable layer!");
+        }
+    }
+    
+    void PlayLickSound()
+    {
+        if (lickSound)
+        {
+            lickSound.Play();
+        }
+    }
+    
+    void PlayMunchSound()
+    {
+        if (munchSound)
+        {
+            munchSound.Play();
         }
     }
 }

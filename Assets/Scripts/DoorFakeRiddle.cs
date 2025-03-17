@@ -7,6 +7,7 @@ public class LickLockController : MonoBehaviour
     public GameObject doorObject;
     public TextMeshProUGUI messageText;
     public AudioSource doorAudio;
+    public AudioSource munchAudio;
     public float messageDuration = 2f;
 
     private bool isLockDestroyed = false;
@@ -29,6 +30,7 @@ public class LickLockController : MonoBehaviour
         {
             if (lockObject != null)
             {
+                PlayMunchSound();
                 Destroy(lockObject);
                 Debug.Log("Lock has been destroyed!");
             }
@@ -73,6 +75,14 @@ public class LickLockController : MonoBehaviour
         if (doorAudio)
         {
             doorAudio.Play();
+        }
+    }
+    
+    void PlayMunchSound()
+    {
+        if (munchAudio)
+        {
+            munchAudio.Play();
         }
     }
 }
