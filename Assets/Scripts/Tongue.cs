@@ -116,7 +116,7 @@ public class Tongue : MonoBehaviour
     {
         if (((1 << obj.layer) & eatable) != 0)
         {
-            //Destroy(obj);
+            Destroy(obj);
 			if(obj.tag != "Gingy") {
 				EntBehaviour s = obj.GetComponent<EntBehaviour>();
 				s.Kill();
