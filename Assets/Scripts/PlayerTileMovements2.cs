@@ -3,11 +3,13 @@ using UnityEngine;
 public class PlayerTileMovements2 : MonoBehaviour
 {
     // public GameObject player;
-    
+
     public float moveSpeed = 5f;
     public float rotationSpeed = 5f;
-    
-    public Vector3 spawnPoint = new Vector3(0f, -2f, -40f);
+
+    public Vector3 spawnPoint = new Vector3(0f, -3f, -40f);
+    public Vector3 respawnPoint = new Vector3(16f, -3f, 2f);
+
     private Vector3 targetDirection = -Vector3.right;
     private Quaternion targetRotation;
     public Transform movePoint;
@@ -32,7 +34,7 @@ public class PlayerTileMovements2 : MonoBehaviour
         movePoint.position = spawnPoint;
 
         targetRotation = transform.rotation;
-		
+
 		_gridManager = GameObject.Find("GridManager");
 		_handler = _gridManager.GetComponent<Handler>();
 
@@ -40,16 +42,16 @@ public class PlayerTileMovements2 : MonoBehaviour
 		facing_index = 3;
 		gridFacing = DIR_ENUM[facing_index];
     }
-    
+
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        
+
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
             isMoving = false;
-            
+
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 targetDirection = Quaternion.Euler(0, -90, 0) * targetDirection;
@@ -77,7 +79,7 @@ public class PlayerTileMovements2 : MonoBehaviour
 				for(short i = 0; i < 4; i++) if(_handler.CoordsCompare(DIR_ENUM[i], gridFacing)) facing_index = i;
             }
 
-            // handle forward movement 
+            // handle forward movement
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !isMoving)
             {
                 Vector3 targetPosition = movePoint.position + targetDirection * 2f; // move forward in the facing direction

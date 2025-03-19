@@ -3,7 +3,7 @@ using TMPro;
 
 public class TriggerTextPrompt : MonoBehaviour
 {
-   
+
     public GameObject TriggerCube1;
     public GameObject TriggerCube2;
     public GameObject TriggerCube3;
@@ -11,7 +11,8 @@ public class TriggerTextPrompt : MonoBehaviour
     public GameObject TriggerCube5;
     public GameObject TriggerCube6;
     public GameObject TriggerCube7;
-    
+    public GameObject targetObject;
+
     public string promptText1 = "prompt 1";
     public string promptText2 = "prompt 2";
     public string promptText3 = "prompt 3";
@@ -19,9 +20,19 @@ public class TriggerTextPrompt : MonoBehaviour
     public string promptText5 = "prompt 5";
     public string promptText6 = "prompt 6";
     public string promptText7 = "prompt 7";
-    
-    public GameObject textPromptUI; 
-    public float displayDuration = 3f; 
+
+    public GameObject textPromptUI;
+    public float displayDuration = 100f;
+
+    void Update()
+    {
+        // If the targetObject is destroyed, destroy this GameObject
+        if (targetObject == null)
+        {
+            Destroy(gameObject);
+            HideTextPrompt();
+        }
+      }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
 
-public class DoorEatBonbon : MonoBehaviour
+public class DoorEatBonBon2 : MonoBehaviour
 {
-    public GameObject bonBon;
+    public GameObject bonBon1;
+    public GameObject bonBon2;
+    public GameObject bonBon3;
     public TextMeshProUGUI messageText;
     public AudioSource doorAudio;
     public AudioSource munchAudio;
@@ -23,7 +25,7 @@ public class DoorEatBonbon : MonoBehaviour
         }
 		*/
 
-        if (bonBon== null && !messageShown && !doorOpened)
+        if (bonBon1== null && bonBon2== null && bonBon3== null &&!messageShown && !doorOpened)
         {
             doorOpened = true;
             messageShown = true;

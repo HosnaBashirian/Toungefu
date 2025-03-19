@@ -7,12 +7,13 @@ public class GingyEater : MonoBehaviour
     public TextMeshProUGUI messageText;
     public float messageDuration = 2f;
     public AudioSource munchSound;
-    
+    public string gingieAnguish = "gingienoises";
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Tongue"))
         {
-            ShowMessage("Nooooooooooooo!");
+            ShowMessage(gingieAnguish);
 
             PlayMunchSound();
             DestroyAllChildren();
@@ -26,7 +27,7 @@ public class GingyEater : MonoBehaviour
         {
             messageText.text = message;
             messageText.gameObject.SetActive(true);
-            
+
             Invoke("HideMessage", messageDuration);
         }
         else
@@ -47,7 +48,7 @@ public class GingyEater : MonoBehaviour
             Debug.LogError("messageText is null in HideMessage!"); // Debug log
         }
     }
-    
+
     void DestroyAllChildren()
     {
         // GameObject parentEatable = transform.parent.gameObject;
@@ -59,9 +60,9 @@ public class GingyEater : MonoBehaviour
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
-        } 
+        }
     }
-    
+
     void PlayMunchSound()
     {
         if (munchSound)

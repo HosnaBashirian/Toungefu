@@ -116,10 +116,11 @@ public class Tongue : MonoBehaviour
     {
         if (((1 << obj.layer) & eatable) != 0)
         {
+            PlayMunchSound();
             Destroy(obj);
 			if(obj.tag != "Gingy") {
 				EntBehaviour s = obj.GetComponent<EntBehaviour>();
-				s.Kill();
+				//s.Kill();
 			} else Destroy(obj);
 
             Debug.Log(obj.name + " has been eaten!");
@@ -129,7 +130,7 @@ public class Tongue : MonoBehaviour
             Debug.LogWarning("Cannot eat " + obj.name + " because it's not on the Eatable layer!");
         }
     }
-    
+
     void PlayLickSound()
     {
         if (lickSound)
@@ -137,7 +138,7 @@ public class Tongue : MonoBehaviour
             lickSound.Play();
         }
     }
-    
+
     void PlayMunchSound()
     {
         if (munchSound)

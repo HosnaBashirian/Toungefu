@@ -5,11 +5,13 @@ public class RiddleTextPrompt : MonoBehaviour
 {
     public GameObject TriggerCube1;
     public GameObject TriggerCube2;
-    
+    public GameObject TriggerCube3;
+
     public string promptRiddle1 = "riddle 1";
     public string promptRiddle2 = "riddle 2";
-    
-    public GameObject textPromptUI; 
+    public string promptRiddle3 = "riddle 3";
+
+    public GameObject textPromptUI;
     public float displayDuration = 2f;
 
     private void OnTriggerEnter(Collider other)
@@ -31,7 +33,7 @@ public class RiddleTextPrompt : MonoBehaviour
             }
         }
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

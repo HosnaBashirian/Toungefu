@@ -15,39 +15,14 @@ public class LickLockController : MonoBehaviour
 
     private void Update()
     {
+
         if (lockObject == null && !isLockDestroyed && !doorOpened)
         {
             doorOpened = true;
             isLockDestroyed = true;
+            ShowMessage("The door is now open. You may proceed to the next puzzle.");
             PlayDoorSound();
-            OpenDoor();
-        }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Tongue"))
-        {
-            if (lockObject != null)
-            {
-                PlayMunchSound();
-                Destroy(lockObject);
-                Debug.Log("Lock has been destroyed!");
-            }
-        }
-    }
-
-    void OpenDoor()
-    {
-        if (messageText != null)
-        {
-            ShowMessage("The door is now open!");
-        }
-        
-        if (doorObject != null)
-        {
-            Destroy(doorObject);
-            Debug.Log("Door has been opened!");
         }
     }
 
@@ -57,19 +32,19 @@ public class LickLockController : MonoBehaviour
         {
             messageText.text = message;
             messageText.gameObject.SetActive(true);
-            
+
             Invoke("HideMessage", messageDuration);
         }
     }
 
     void HideMessage()
     {
-        if (messageText != null)
-        {
-            messageText.gameObject.SetActive(false);
-        }
+      messageText.gameObject.SetActive(false);
+
+      PlayMunchSound();
+      Destroy(gameObject);
     }
-    
+
     void PlayDoorSound()
     {
         if (doorAudio)
@@ -77,7 +52,7 @@ public class LickLockController : MonoBehaviour
             doorAudio.Play();
         }
     }
-    
+
     void PlayMunchSound()
     {
         if (munchAudio)

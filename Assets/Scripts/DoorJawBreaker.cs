@@ -16,7 +16,7 @@ public class DoorJawBreaker : MonoBehaviour
         {
             doorOpened = true;
             messageShown = true;
-            ShowMessage("The door is now open. Congratulations little frog.");
+            ShowMessage("JAWBREAKER VANQUISHED");
             PlayDoorSound();
         }
     }
@@ -39,7 +39,7 @@ public class DoorJawBreaker : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     void PlayDoorSound()
     {
         if (doorAudio)

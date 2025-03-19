@@ -5,8 +5,6 @@ public class DoorTutorial : MonoBehaviour
 {
     public GameObject gingy;
     public TextMeshProUGUI messageText;
-    public Animator doorLeftAnimator;
-    public Animator doorRightAnimator;
     public AudioSource doorAudio;
     public AudioSource munchAudio;
     public float messageDuration = 2f;
@@ -20,14 +18,14 @@ public class DoorTutorial : MonoBehaviour
             Debug.LogWarning("Gingy not assigned");
         }
     }
-    
+
     private void Update()
     {
         if (gingy == null)
         {
             Debug.Log("Gingy is null triggering door open");
         }
-        
+
         if (gingy== null && !messageShown && !doorOpened)
         {
             doorOpened = true;
@@ -44,7 +42,7 @@ public class DoorTutorial : MonoBehaviour
         {
             messageText.text = message;
             messageText.gameObject.SetActive(true);
-            
+
             Invoke("HideMessage", messageDuration);
         }
     }
@@ -57,18 +55,7 @@ public class DoorTutorial : MonoBehaviour
         Destroy(gameObject);
     }
     
-    void PlayDoorAnimation()
-    {
-        if (doorLeftAnimator != null)
-        {
-            doorLeftAnimator.Play("DoorLeftOpen");
-        }
-        if (doorRightAnimator != null)
-        {
-            doorRightAnimator.Play("DoorRightOpen");
-        }
-    }
-    
+
     void PlayDoorSound()
     {
         if (doorAudio)
